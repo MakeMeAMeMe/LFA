@@ -1,0 +1,180 @@
+{
+    "movimento_vazio": "#",
+    "coringa": "?",
+    "estado_inicial": "q0",
+    "estados_finais": [
+        "q1"
+    ],
+    "states": [
+        {
+            "nome": "p0",
+            "operacoes": [
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "#",
+                    "simbolo_empilhar": "0",
+                    "next_state": "p0"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "0",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p01"
+                }
+            ]
+        },
+        {
+            "nome": "p01",
+            "operacoes": [
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "0",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "1",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "1",
+                    "simbolo_empilhar": "11",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "1",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "0",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "0",
+                    "simbolo_empilhar": "00",
+                    "next_state": "p01"
+                },
+                {
+                    "simbolo_fita": "?",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "#",
+                    "next_state": "q1"
+                }
+            ]
+        },
+        {
+            "nome": "q1",
+            "operacoes": []
+        },
+        {
+            "nome": "q0",
+            "operacoes": [
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "0",
+                    "next_state": "p0"
+                },
+                {
+                    "simbolo_fita": "?",
+                    "simbolo_pilha": "#",
+                    "simbolo_empilhar": "#",
+                    "next_state": "q1"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "1",
+                    "next_state": "p1"
+                }
+            ]
+        },
+        {
+            "nome" : "p1",
+            "operacoes" : [
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "#",
+                    "simbolo_empilhar": "1",
+                    "next_state": "p1"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "1",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p10"
+                }
+            ]
+        },
+        {
+            "nome" : "p10",
+            "operacoes" : [
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "1",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "0",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "1",
+                    "simbolo_pilha": "0",
+                    "simbolo_empilhar": "00",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "0",
+                    "simbolo_empilhar": "#",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "1",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "0",
+                    "simbolo_pilha": "1",
+                    "simbolo_empilhar": "11",
+                    "next_state": "p10"
+                },
+                {
+                    "simbolo_fita": "?",
+                    "simbolo_pilha": "?",
+                    "simbolo_empilhar": "#",
+                    "next_state": "q1"
+                }
+            ]
+        }
+    ],
+    "fitas_aprovar": [
+        "0011100011010101",
+        "101010001100001111",
+        "10101001",
+        "0011",
+        "10",
+        "01"
+    ],
+    "fitas_reprovar": [
+        "0011101111110101",
+        "10101010101010011",
+        "1010010000001110",
+        "1",
+        "000"
+    ]
+}
