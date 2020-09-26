@@ -49,6 +49,7 @@ class AP:
                     if operacao.simbolo_pilha == self.coringa:
                         if len(self.__pilha) == 0:
                             if operacao.next_state in self.estados_finais:
+                                print(str(operacao))
                                 self.__estado_atual = operacao.next_state
                                 return True
                     elif self.__pilha[-1] == operacao.simbolo_pilha:
@@ -56,6 +57,7 @@ class AP:
                         if operacao.simbolo_empilhar != self.movimento_vazio:
                             self.__pilha.extend(
                                 [simbolo for simbolo in operacao.simbolo_empilhar])
+                        print(str(operacao))
                         self.__estado_atual = operacao.next_state
                         return True
             return False
@@ -66,6 +68,7 @@ class AP:
                     if operacao.simbolo_empilhar != self.movimento_vazio:
                         self.__pilha.extend(
                             [simbolo for simbolo in operacao.simbolo_empilhar])
+                    print(str(operacao))
                     self.__estado_atual = operacao.next_state
                     return True
                 elif len(self.__pilha) > 0 and self.__pilha[-1] == operacao.simbolo_pilha:
@@ -73,12 +76,14 @@ class AP:
                     if operacao.simbolo_empilhar != self.movimento_vazio:
                         self.__pilha.extend(
                             [simbolo for simbolo in operacao.simbolo_empilhar])
+                    print(str(operacao))
                     self.__estado_atual = operacao.next_state
                     return True
                 elif operacao.simbolo_pilha == self.coringa and len(self.__pilha) == 0:
                     if operacao.simbolo_empilhar != self.movimento_vazio:
                         self.__pilha.extend(
                             [simbolo for simbolo in operacao.simbolo_empilhar])
+                    print(str(operacao))
                     self.__estado_atual = operacao.next_state
                     return True
         return False
@@ -114,8 +119,9 @@ if __name__ == "__main__":
     for fita in fitas_aprovar:
         ap = AP(fita, estados, estado_inicial,
                 estados_finais, movimento_vazio, coringa)
+        print("\nFita a ser testada: " + fita + "\n")
         while ap.executar_operacao():
-            ...
+            print("Pilha: " + str(ap.pilha) + "\nFita atual: " + ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
             # print(ap)
         if len(ap.fita) == 0 and len(ap.pilha) == 0 and ap.estado_atual in ap.estados_finais:
             print(f"Fita aprovada: {fita}")
@@ -126,8 +132,9 @@ if __name__ == "__main__":
     for fita in fitas_reprovar:
         ap = AP(fita, estados, estado_inicial,
                 estados_finais, movimento_vazio, coringa)
+        print("\nFita a ser testada: " + fita + "\n")
         while ap.executar_operacao():
-            ...
+            print("Pilha: " + str(ap.pilha) + "\nFita atual: " + ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
             # print(ap)
         if len(ap.fita) != 0 or len(ap.pilha) != 0 or not ap.estado_atual in ap.estados_finais:
             print(f"Fita reprovada: {fita}")
