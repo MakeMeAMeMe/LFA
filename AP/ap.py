@@ -115,28 +115,36 @@ if __name__ == "__main__":
     fitas_reprovar = data.get("fitas_reprovar")
     estados_finais = data.get("estados_finais")
 
+    print("-" * 40)
     print("\nPalavras a aprovar\n")
     for fita in fitas_aprovar:
         ap = AP(fita, estados, estado_inicial,
                 estados_finais, movimento_vazio, coringa)
+        print("-" * 40)
         print("\nFita a ser testada: " + fita + "\n")
         while ap.executar_operacao():
-            print("Pilha: " + str(ap.pilha) + "\nFita atual: " + ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
+            print("Pilha: " + str(ap.pilha) + "\nRestante da Fita: " +
+                  ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
             # print(ap)
         if len(ap.fita) == 0 and len(ap.pilha) == 0 and ap.estado_atual in ap.estados_finais:
             print(f"Fita aprovada: {fita}")
         else:
             print(f"Erro fita: {fita}")
+    print("-" * 40)
+    print("-" * 40)
 
     print("\nPalavras a reprovar\n")
     for fita in fitas_reprovar:
         ap = AP(fita, estados, estado_inicial,
                 estados_finais, movimento_vazio, coringa)
+        print("-" * 40)
         print("\nFita a ser testada: " + fita + "\n")
         while ap.executar_operacao():
-            print("Pilha: " + str(ap.pilha) + "\nFita atual: " + ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
+            print("Pilha: " + str(ap.pilha) + "\nFita atual: " +
+                  ap.fita + "\nEstado atual: " + ap.estado_atual + "\n")
             # print(ap)
         if len(ap.fita) != 0 or len(ap.pilha) != 0 or not ap.estado_atual in ap.estados_finais:
             print(f"Fita reprovada: {fita}")
         else:
             print(f"Erro fita: {fita}")
+        print("-" * 40)
