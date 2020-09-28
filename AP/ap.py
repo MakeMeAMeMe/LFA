@@ -71,8 +71,8 @@ class AP:
                     print(str(operacao))
                     self.__estado_atual = operacao.next_state
                     return True
-                elif len(self.__pilha) > 0 and self.__pilha[-1] == operacao.simbolo_pilha:
-                    self.__pilha.pop()
+                elif len(self.__pilha) >= len(operacao.simbolo_pilha) and self.__pilha[len(self.__pilha) - len(operacao.simbolo_pilha):] == list(simbolo for simbolo in operacao.simbolo_pilha):
+                    self.__pilha = self.__pilha[:len(self.__pilha) - len(operacao.simbolo_pilha)]
                     if operacao.simbolo_empilhar != self.movimento_vazio:
                         self.__pilha.extend(
                             [simbolo for simbolo in operacao.simbolo_empilhar])
