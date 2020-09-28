@@ -6,9 +6,12 @@ class Base extends Component {
         return (
             <Fragment>
                 <header>
-                    <p>
-                        dfa minifier
-                    </p>
+                    <Container fluid>
+
+                    <h3>
+                        Minimizador AFD
+                    </h3>
+                    </Container>
                 </header>
                 <section id="content">
                     <Container fluid>

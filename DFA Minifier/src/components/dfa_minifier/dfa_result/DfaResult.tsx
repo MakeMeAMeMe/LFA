@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react"
 import { Graphviz } from "graphviz-react"
 // Local Imports
 import IEstado, { IOperacao } from "../../../models/Estado"
+import { Col, Row } from "react-bootstrap";
 
 interface IDfaResultProps {
     states: Array<IEstado>
@@ -64,32 +65,32 @@ class DfaResult extends Component<IDfaResultProps, IDfaResultState> {
         let reachable_states: Array<IEstado> = new Array<IEstado>();
         let index_initial_state = unminified_states.findIndex(inner_state => inner_state.inicial === true)
         reachable_states.push(unminified_states[index_initial_state])
-        
-        for(let i = 0; i < unminified_states[index_initial_state].operacoes.length; i++) {
-            if(unminified_states[index_initial_state].operacoes[i].next_state_id !== "") {
+
+        for (let i = 0; i < unminified_states[index_initial_state].operacoes.length; i++) {
+            if (unminified_states[index_initial_state].operacoes[i].next_state_id !== "") {
                 let index_next_state = unminified_states.findIndex(inner_state => inner_state.id === unminified_states[index_initial_state].operacoes[i].next_state_id)
-                if(!reachable_states.includes(unminified_states[index_next_state])) {
+                if (!reachable_states.includes(unminified_states[index_next_state])) {
                     reachable_states.push(unminified_states[index_next_state])
                     bfs_queue.push(unminified_states[index_next_state])
                 }
             }
         }
 
-        while(bfs_queue.length > 0) {
+        while (bfs_queue.length > 0) {
             let current_state = bfs_queue.pop()
             let index_current_state = unminified_states.findIndex(inner_state => inner_state.id === current_state?.id)
-                for (let i=0; i < unminified_states[index_current_state].operacoes.length; i++) {
-                    if(unminified_states[index_current_state].operacoes[i].next_state_id !== "") {
-                        let index_next_state = unminified_states.findIndex(inner_state => inner_state.id === unminified_states[index_current_state].operacoes[i].next_state_id)
-                        if(!reachable_states.includes(unminified_states[index_next_state])) {
-                            reachable_states.push(unminified_states[index_next_state])
-                            bfs_queue.push(unminified_states[index_next_state])
-                        }
+            for (let i = 0; i < unminified_states[index_current_state].operacoes.length; i++) {
+                if (unminified_states[index_current_state].operacoes[i].next_state_id !== "") {
+                    let index_next_state = unminified_states.findIndex(inner_state => inner_state.id === unminified_states[index_current_state].operacoes[i].next_state_id)
+                    if (!reachable_states.includes(unminified_states[index_next_state])) {
+                        reachable_states.push(unminified_states[index_next_state])
+                        bfs_queue.push(unminified_states[index_next_state])
                     }
                 }
+            }
         }
 
-        reachable_states.sort((a,b) => parseInt(a.id) - parseInt(b.id))
+        reachable_states.sort((a, b) => parseInt(a.id) - parseInt(b.id))
         const minified_states: Array<IEstado> = new Array<IEstado>();
         const matrix_aux: Array<linha_matriz_aux> = new Array<linha_matriz_aux>();
         for (let i = 0; i < reachable_states.length - 1; i++) {
@@ -102,7 +103,7 @@ class DfaResult extends Component<IDfaResultProps, IDfaResultState> {
         console.log("Linhas da Matriz Auxiliar:")
         console.table(matrix_aux)
 
-        for(let i = 0; i < matrix_aux.length; i++) {
+        for (let i = 0; i < matrix_aux.length; i++) {
             console.log("Elementos da Linha: " + i)
             console.table(matrix_aux[i].cols)
         }
@@ -124,7 +125,7 @@ class DfaResult extends Component<IDfaResultProps, IDfaResultState> {
         console.log("Linhas da Matriz Auxiliar:")
         console.table(matrix_aux)
 
-        for(let i = 0; i < matrix_aux.length; i++) {
+        for (let i = 0; i < matrix_aux.length; i++) {
             console.log("Elementos da Linha: " + i)
             console.table(matrix_aux[i].cols)
         }
@@ -171,7 +172,7 @@ class DfaResult extends Component<IDfaResultProps, IDfaResultState> {
         console.log("Linhas da Matriz Auxiliar:")
         console.table(matrix_aux)
 
-        for(let i = 0; i < matrix_aux.length; i++) {
+        for (let i = 0; i < matrix_aux.length; i++) {
             console.log("Elementos da Linha: " + i)
             console.table(matrix_aux[i].cols)
         }
@@ -230,14 +231,24 @@ class DfaResult extends Component<IDfaResultProps, IDfaResultState> {
         }
 
         const dot_string_min = this.statesToDotString(minified_states);
-        // const dot_string = this.statesToDotString(inner_states);
+        const dot_string = this.statesToDotString(states);
 
         return (
             <Fragment>
-                <p>Result should be here</p>
-                <Graphviz dot={
-                    dot_string_min
-                } />
+                <Row>
+                    <Col>
+                        <h5>Automato Original</h5>
+                        <Graphviz dot={
+                            dot_string
+                        } />
+                    </Col>
+                    <Col>
+                        <h5>Automato Minimizado</h5>
+                        <Graphviz dot={
+                            dot_string_min
+                        } />
+                    </Col>
+                </Row>
             </Fragment>
         )
     }
